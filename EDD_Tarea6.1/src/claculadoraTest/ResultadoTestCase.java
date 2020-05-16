@@ -17,7 +17,7 @@ class ResultadoTestCase {
 	private static RPN rpn;
 
 	public void init() {
-		esperado = (Math.pow(2, 3) + 4.0 * 5.0 - 7.0/2.0) % 3.0;
+		esperado = (Math.pow(2.3, 3) + 4.0 * 5.5 - 7.0/2.0) % 3.0;
 		invalido = 2.0;
 	}
 	
@@ -28,7 +28,7 @@ class ResultadoTestCase {
 	public void testResultado() {
 		init();
 		//Caso válido: La entrada tiene un formato válido
-	rpn = new RPN("2 3 ^ 4 5 * + 7 2 / - 3 %");
+	rpn = new RPN("2.3 3 ^ 4 5.5 * + 7 2 / - 3 %");
 	assertNotNull(rpn);  // el objeto se ha creado
 	assertEquals(esperado, rpn.resultado());  // el resultado es el esperado
 	assertNotEquals(invalido, rpn.resultado()); // el resultado es distinto del resultado inválido

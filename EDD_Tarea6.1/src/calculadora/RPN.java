@@ -72,48 +72,46 @@ public class RPN {
 	 */
 	public double resultado() {
 		double a, b;
-		int j;
-		for (int i = 0; i < commando.length(); i++) {
-			// si es un digito
-			if (Character.isDigit(commando.charAt(i))) {
-				double numero;
-				// obtener un string a partir del numero
-				String temp = "";
-				for (j = 0; (j < 100)
-						&& (Character.isDigit(commando.charAt(i)) || (commando.charAt(i) == '.')); i++, j++) {
-					temp = temp + String.valueOf(commando.charAt(i));
-				}
-				// convertir a double y añadir a la pila
-				numero = Double.parseDouble(temp);
-				pushPila(numero);
+		//obtener un vector con los tokens
+		String [] tokens = commando.split(" ");
+		for (int i = 0; i < tokens.length; i++) {
 			// Si es un operador
-			} else if (commando.charAt(i) == '+') {
+			if (tokens[i].equals("+")) {
 				b = popPila();
 				a = popPila();
 				pushPila(a + b);
-			} else if (commando.charAt(i) == '-') {
+			} else if (tokens[i].equals("-")) {
 				b = popPila();
 				a = popPila();
 				pushPila(a - b);
-			} else if (commando.charAt(i) == '*') {
+			} else if (tokens[i].equals("*")) {
 				b = popPila();
 				a = popPila();
 				pushPila(a * b);
-			} else if (commando.charAt(i) == '/') {
+			} else if (tokens[i].equals("/")) {
 				b = popPila();
 				a = popPila();
 				pushPila(a / b);
-			} else if (commando.charAt(i) == '^') {
+			} else if (tokens[i].equals("^")) {
 				b = popPila();
 				a = popPila();
 				pushPila(Math.pow(a, b));
-			} else if (commando.charAt(i) == '%') {
+			} else if (tokens[i].equals("%")) {
 				b = popPila();
 				a = popPila();
 				pushPila(a % b);
-			// Si no es nada de lo anterior ni tampoco espacio en blanco 
-			} else if (commando.charAt(i) != ' ') {
-				throw new IllegalArgumentException();
+			// Si no es nada de lo anterior 
+			} else {
+				/*
+				 * Intentar convertir a double y añadir a la pila, 
+				 * si no hay éxito es que el caracter no es un operador ni un número.
+				 */
+				try {
+					Double numero = Double.parseDouble(tokens[i]);
+					pushPila(numero);
+				}catch (Exception e) {
+					throw new IllegalArgumentException();
+				}
 			}
 		}
 		// Obtener resultado final
@@ -122,10 +120,10 @@ public class RPN {
 		if (arriba != null) {
 			throw new IllegalArgumentException();
 		}
-
+		
 		return val;
-
 	}
+		
 
 	/**
 	 * getter para testing, se usa para comprobar en las pruebas unitarias si el objeto se crea correctamente @see PilaTestCase
