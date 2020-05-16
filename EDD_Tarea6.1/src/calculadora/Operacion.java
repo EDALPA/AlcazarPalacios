@@ -2,25 +2,25 @@ package calculadora;
 
 import java.util.HashMap;
 /**
- * 
+ * <h2>Inteface para ser implementado por las clases que realizan las operaciones.</h2>
  * @author Eduardo
- * Inteface para ser implementado por las clase que realizan las operaciones
+ * 
  * 
  */
 interface Estrategia{
 	/**
 	 * 
-	 * @param a El primer operando
-	 * @param b El segundo operando
-	 * @return (double) El resultado de la operación
+	 * @param a El primer operando.
+	 * @param b El segundo operando.
+	 * @return (double) El resultado de la operación.
 	 */
 	public double comoOpera(double a, double b);
 }
 
 /**
- * 
+ * <h3>Clase para sumar</h3>
  * @author Eduardo
- * Clase para sumar
+ * 
  */
 class Suma implements Estrategia{
 	
@@ -34,9 +34,9 @@ class Suma implements Estrategia{
 }
 
 /**
- * 
+ * <h2>Clase para restar</h2>
  * @author Eduardo
- * Clase para restar
+ * 
  */
 class Resta implements Estrategia{
 	
@@ -50,9 +50,9 @@ class Resta implements Estrategia{
 }
 
 /**
- * 
+ * <h3>Clase para multiplicar</h3>
  * @author Eduardo
- * Clase para multiplicar
+ * 
  */
 class Multi implements Estrategia{
 	
@@ -66,9 +66,9 @@ class Multi implements Estrategia{
 }
 
 /**
- * 
+ * <h3>Clase par dividir</h3>
  * @author Eduardo
- * Clase par dividir
+ * 
  */
 class Div implements Estrategia{
 	
@@ -82,9 +82,9 @@ class Div implements Estrategia{
 }
 
 /**
- * 
+ * <h3>Clase para potenciar</h3>
  * @author Eduardo
- * Clase para potenciar
+ * 
  */
 class Pot implements Estrategia{
 	
@@ -98,9 +98,9 @@ class Pot implements Estrategia{
 }
 
 /**
- * 
+ * <h3>Clase para obtener el módulo</h3>
  * @author Eduardo
- * Clase para obtener el módulo
+ * 
  */
 class Mod implements Estrategia{
 	
@@ -114,16 +114,17 @@ class Mod implements Estrategia{
 }
 
 /**
- * 
+ * <h3>Clase para manejar las estratégias</h3>
  * @author Eduardo
- * Clase para manejar las estratégias
+ * 
  */
 public class Operacion {
+	
 	Estrategia e;
 	HashMap<String, Estrategia> estrategias;
 	
 	/**
-	 * Asigna la estrategia
+	 * <h2>Asigna la estrategia</h2>
 	 * @param e La estrategia a usar
 	 */
 	public void setEstrategia(Estrategia e) {
@@ -131,9 +132,11 @@ public class Operacion {
 	}
 	
 	/**
+	 * <h2>Inicializa las estrategias</h2>
 	 * Este método inicializa solamente las estrategias necesarias para la operación en curso 
 	 * y las almacena en un Hashmap para que puedan ser seleccionadas 
-	 * dinámicamente desde el método "resultado()" @see RPN
+	 * dinámicamente desde el método "resultado()" 
+	 * @see RPN
 	 * 
 	 * @param commando El String de entrada
 	 */
@@ -154,7 +157,8 @@ public class Operacion {
 	}
 	
 	/**
-	 * Efectua la operacion con la estrategia seleccionada @see Estrategia
+	 * <h2>Efectua la operacion con la estrategia seleccionada</h2> 
+	 * @see Estrategia
 	 * @param a El primer operando
 	 * @param b El segundo operando
 	 * @return (double) El resultado de la operación

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class TestRPN { 
 	/**
 	 * Método main, se pide la entrada por teclado y se muestra el retorno del método "resultado"
-	 * @param args
+	 * @param args Argumentos del método (No se usan)
 	 */
 	public static void main(String args[]) {
 		while (true) {
