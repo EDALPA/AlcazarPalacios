@@ -71,34 +71,27 @@ public class RPN {
 	 * @return (double) el resultado final de la operación
 	 */
 	public double resultado() {
-		double a, b;
 		//obtener un vector con los tokens
 		String [] tokens = commando.split(" ");
 		for (int i = 0; i < tokens.length; i++) {
 			// Si es un operador
 			if (tokens[i].equals("+")) {
-				b = popPila();
-				a = popPila();
+				setValores();
 				pushPila(a + b);
 			} else if (tokens[i].equals("-")) {
-				b = popPila();
-				a = popPila();
+				setValores();
 				pushPila(a - b);
 			} else if (tokens[i].equals("*")) {
-				b = popPila();
-				a = popPila();
+				setValores();
 				pushPila(a * b);
 			} else if (tokens[i].equals("/")) {
-				b = popPila();
-				a = popPila();
+				setValores();
 				pushPila(a / b);
 			} else if (tokens[i].equals("^")) {
-				b = popPila();
-				a = popPila();
+				setValores();
 				pushPila(Math.pow(a, b));
 			} else if (tokens[i].equals("%")) {
-				b = popPila();
-				a = popPila();
+				setValores();
 				pushPila(a % b);
 			// Si no es nada de lo anterior 
 			} else {
@@ -123,6 +116,14 @@ public class RPN {
 		
 		return val;
 	}
+
+	/**
+	 * Método para recoger valores de la pila y asignarlos a "a" y "b"
+	 */
+	public void setValores() {
+		b = popPila();
+		a = popPila();
+	}
 		
 
 	/**
@@ -133,7 +134,26 @@ public class RPN {
 		return arriba;
 	}
 
+	/**
+	 * getter para testing, se usa para comprobar en las pruebas unitarias si el valor se asigna correctamente @see setValoresTestCase
+	 * @return (double) el atributo a
+	 */
+	public double getA() {
+		return a;
+	}
+
+	/**
+	 * getter para testing, se usa para comprobar en las pruebas unitarias si el valor se asigna correctamente @see setValoresTestCase
+	 * @return el atributo b
+	 */
+	public double getB() {
+		return b;
+	}
+
+
 	private String commando;
 	private NodoPila arriba;
+	private double a;
+	private double b;
 
 }
