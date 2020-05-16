@@ -67,38 +67,20 @@ public class RPN {
 
 	/**
 	 * Método para calcular el resultado, este método extrae primero los dígitos y operadores de la entrada
-	 * y en funcíon de su valor realiza las operaciones de apilado y desapilado así como las aritméticas.
+	 * y en funcíon de su valor realiza las operaciones de apilado y desapilado así como las aritméticas 
+	 * haciendo uso de la estrategia adecuada.
 	 * @return (double) el resultado final de la operación
 	 */
 	public double resultado() {
-		//obtener un vector con los tokens
 		String [] tokens = commando.split(" ");
+		Operacion operacion = new Operacion();
+		operacion.setEstrategias(commando);
 		for (int i = 0; i < tokens.length; i++) {
-			// Si es un operador
-			if (tokens[i].equals("+")) {
+			if(operacion.estrategias.containsKey(tokens[i])) {
 				setValores();
-				pushPila(a + b);
-			} else if (tokens[i].equals("-")) {
-				setValores();
-				pushPila(a - b);
-			} else if (tokens[i].equals("*")) {
-				setValores();
-				pushPila(a * b);
-			} else if (tokens[i].equals("/")) {
-				setValores();
-				pushPila(a / b);
-			} else if (tokens[i].equals("^")) {
-				setValores();
-				pushPila(Math.pow(a, b));
-			} else if (tokens[i].equals("%")) {
-				setValores();
-				pushPila(a % b);
-			// Si no es nada de lo anterior 
+				operacion.setEstrategia(operacion.estrategias.get(tokens[i]));
+				pushPila(operacion.opera(a, b));
 			} else {
-				/*
-				 * Intentar convertir a double y añadir a la pila, 
-				 * si no hay éxito es que el caracter no es un operador ni un número.
-				 */
 				try {
 					Double numero = Double.parseDouble(tokens[i]);
 					pushPila(numero);
@@ -107,9 +89,7 @@ public class RPN {
 				}
 			}
 		}
-		// Obtener resultado final
 		double val = popPila();
-		// Comprobar pila vacía
 		if (arriba != null) {
 			throw new IllegalArgumentException();
 		}
@@ -135,7 +115,7 @@ public class RPN {
 	}
 
 	/**
-	 * getter para testing, se usa para comprobar en las pruebas unitarias si el valor se asigna correctamente @see setValoresTestCase
+	 * getter para testing, se usa para comprobar en las pruebas unitarias si el valor se asigna correctamente @see SetValoresTestCase
 	 * @return (double) el atributo a
 	 */
 	public double getA() {
@@ -143,7 +123,7 @@ public class RPN {
 	}
 
 	/**
-	 * getter para testing, se usa para comprobar en las pruebas unitarias si el valor se asigna correctamente @see setValoresTestCase
+	 * getter para testing, se usa para comprobar en las pruebas unitarias si el valor se asigna correctamente @see SetValoresTestCase
 	 * @return el atributo b
 	 */
 	public double getB() {

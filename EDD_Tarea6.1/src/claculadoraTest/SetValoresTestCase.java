@@ -11,7 +11,7 @@ import calculadora.RPN;
  * @author Eduardo
  * Clase par aprobar el método "setValores()" @see RPN 
  */
-class setValoresTest {
+class SetValoresTestCase {
 	RPN rpn;
 	
 	/**
